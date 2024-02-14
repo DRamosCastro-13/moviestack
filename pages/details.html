@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/stylesheet.index.css">
+    <link rel="icon" href="../assets/Moviestack_favicon.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Details - Moviestack</title>
+</head>
+<body>
+    <div class="min-h-screen w-full flex flex-col" id="app">
+        <header class="flex z-40">
+            <div class="">
+                <img id="imageLogo" src="../assets/Moviestack_isotipo.png" alt="Cinema">
+                <div id="logosText">
+                    <img id="imageText" src="../assets/Moviestack_logotipo2.png" alt="Moviestack">
+                    <h1>MORE THAN MOVIES</h1>
+                </div>
+            </div>
+            <nav class="font-semibold text-xl">
+                <a href="../index.html">Home</a>
+                <a href="../pages/movies.html">Movies</a>
+                <a href="../pages/favs.html">Favs</a>
+        </header>
+        <main class="flex flex-col flex-wrap place-content-around -mt-6 pt-80 md:pt-40 pb-6 static min-h-screen w-full">
+            <div class="flex flex-col md:flex-row lg:flex-row flex-wrap w-full justify-center gap-10">
+                <div class="md:w-5/12 w-full">
+                    <img :src="'https://moviestack.onrender.com/static/' + movieDetails.image" alt={{movieDetails.title}}>
+                </div>
+                <article class="flex flex-col justify-center w-11/12 md:w-5/12 gap-3 px-4">
+                    <h2 class="text-4xl font-bold">{{movieDetails.title}}</h2>
+                    <h3 class="text-2xl">{{movieDetails.tagline}}</h3>
+                    <h4 class="text-gray-400">{{genres}}</h4>
+                    <p>{{movieDetails.overview}}</p>
+                </article>
+                <div class="flex flex-col md:flex-row w-full mt-6 justify-around gap-3 md:gap-3 lg:gap-x-3 px-4" >
+                    <table class="border-collapse w-11/12 md:w-5/12">
+                        <tr>
+                            <td class="border border-slate-100 p-3">Original Language</td>
+                            <td class="border border-slate-100 p-3">{{movieDetails.original_language}}</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-slate-100 p-3">Release Date</td>
+                            <td class="border border-slate-100 p-3">{{movieDetails.release_date}}</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-slate-100 p-3">Runtime</td>
+                            <td class="border border-slate-100 p-3">{{movieDetails.runtime}} minutes</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-slate-100 p-3">Status</td>
+                            <td class="border border-slate-100 p-3">{{movieDetails.status}}</td>
+                        </tr>
+                    </table>
+                    <table class="w-11/12 md:w-5/12 border-collapse">
+                        <tr>
+                            <td class="border border-slate-100 p-1">Vote Average</td>
+                            <td class="border border-slate-100 p-1">{{movieDetails.vote_average}}</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-slate-100 p-1">Budget</td>
+                            <td class="border border-slate-100 p-1">{{movieDetails.budget.toLocaleString()}}</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-slate-100 p-1">Revenue</td>
+                            <td class="border border-slate-100 p-1">{{movieDetails.revenue.toLocaleString()}}</td>
+                        </tr>
+                    </table>
+                </div>
+                
+            </div>
+        </main>
+        <footer>
+            <h4>By: Daniela Ramos-Castro</h4>
+        </footer>
+    </div>  
+    <script type="module" src="../assets/tailwind.config.extension.js"></script>
+    <sript type="module" src="../assets/tailwind.config.js"></sript>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script type="module" src="./details.js"></script>
+</body>
