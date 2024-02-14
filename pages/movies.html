@@ -25,7 +25,8 @@
         </header>
         <main class="flex flex-col flex-wrap place-content-around -mt-6 pt-28 static min-h-screen w-full">
             <h2 class="text-center text-7xl mb-16 mt-20 font-bold">Movies</h2>
-            <div class="w-full flex justify-center items-center flex-col md:flex-row lg:flex-row gap-5 mb-8">
+            <div class="w-full flex-wrap flex justify-center items-center flex-col md:flex-row lg:flex-row gap-5 mb-8">
+
                 <select class="outline-none flex py-3.5 px-4 rounded-lg text-gray-500 font-semibold cursor-pointer" v-model="selectedGenre">
                     <option value="all">All Genres</option>
                    <template v-if="genres.length > 0" v-for="genre of genres">
@@ -36,6 +37,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                     </svg>
                 </select>
+
                 <div class="flex bg-gray-100 px-4 w-72 py-3 items-center space-x-4 rounded-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-30" fill="none" viewBox="0 0 24 24"
                         stroke="black">
@@ -45,9 +47,27 @@
                     <input class="bg-gray-100 outline-none text-gray-700"  type="text" placeholder="Search by Title" v-model="searchTitle" />
                 </div>
                 {{filterMovies}}
+
+                <div class="w-full"></div>
+
+                <div class="flex flex-row align-middle bg-violet-500 p-2 rounded-lg place-self-end">
+                    <button @click="changePage(currentPage - 1)" :disabled="currentPage === 1">
+                        <!-- Use a left arrow icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                        </svg>
+                    </button>
+                    <span>{{ currentPage }} / {{ totalPages }}</span>
+                    <button @click="changePage(currentPage + 1)" :disabled="currentPage === totalPages">
+                        <!-- Use a right arrow icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </div>
             </div>
             <div class="grid lg:grid-cols-4 lg:gap-x-6 justify-around gap-10 w-11/12 mb-10 md:grid-cols-2 grid-cols-1 relative ml-4 sm:ml-10 md:ml-8 lg:ml-14 place-content-around">
-                <template v-if="movies.length > 0" v-for="movie in filteredMovies">
+                <template v-if="paginatedMovies.length > 0" v-for="movie in paginatedMovies">
                     <div class="flex flex-col flex-wrap bg-[#4e435e] border-box h-90 w-fit p-4 border-solid lg: border-black border-2 rounded-xl relative lg:my-4 sm:my-2">
                         <button @click="addFav(movie.id)" data-boton="fav" type="button" class="absolute right-3 top-2">
                             <template v-if="isFavorite.includes(movie.id)">
@@ -73,6 +93,23 @@
                 <template v-else>
                     <h2 class="text-3xl font-bold text-purple-200">No movies found</h2>
                 </template>
+            </div>
+            <div class="w-11/12 flex pb-8 justify-end">
+                <div class="flex w-[105px] flex-row align-middle bg-violet-500 p-2 rounded-lg place-self-end">
+                    <button @click="changePage(currentPage - 1)" :disabled="currentPage === 1">
+                        <!-- Use a left arrow icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                        </svg>
+                    </button>
+                    <span>{{ currentPage }} / {{ totalPages }}</span>
+                    <button @click="changePage(currentPage + 1)" :disabled="currentPage === totalPages">
+                        <!-- Use a right arrow icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </main>
         <footer>
